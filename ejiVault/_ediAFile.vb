@@ -337,7 +337,7 @@ Namespace EJI
           End If
         End Using
       End Using
-      Return True
+      Return mRet
     End Function
     ''' <summary>
     ''' Deletes only when record is not further copied
@@ -346,6 +346,8 @@ Namespace EJI
     ''' </summary>
     ''' <param name="t_drid"></param>
     Public Shared Sub FileDelete(ByVal t_drid As String)
+	'Use IO Functions
+	'Map path if IsLocalIsgecVault
       Dim tmp As ediAFile = GetFileByRecordID(t_drid)
       If IsFileCopied(t_drid) Then
         Throw New ediException(1001, "File is copied CANNOT delete.")
@@ -355,15 +357,18 @@ Namespace EJI
         mayDeleteRecord = False
         Dim tmpLib As ediALib = ediALib.GetLibraryByID(tmp.t_lbcd)
         Dim PathFileName As String = tmpLib.LibraryPath & "\" & tmp.t_dcid
+        If Not EJI.DBCommon.IsLocalISGECVault Then
+          EJI.ediALib.ConnectISGECVault(tmpLib)
+        End If
         Dim FileExists As Boolean = False
         Try
-          FileExists = My.Computer.FileSystem.FileExists(PathFileName)
+          FileExists = IO.File.Exists(PathFileName)
         Catch ex As Exception
           Throw New ediException(1002, "Error while checking File Exists.")
         End Try
         If FileExists Then
           Try
-            My.Computer.FileSystem.DeleteFile(PathFileName)
+            IO.File.Delete(PathFileName)
             mayDeleteRecord = True
           Catch ex As Exception
             Throw New ediException(1003, "Error while deleting disk file.")
@@ -402,15 +407,18 @@ Namespace EJI
         mayDeleteRecord = False
         Dim tmpLib As ediALib = ediALib.GetLibraryByID(tmp.t_lbcd)
         Dim PathFileName As String = tmpLib.LibraryPath & "\" & tmp.t_dcid
+        If Not EJI.DBCommon.IsLocalISGECVault Then
+          EJI.ediALib.ConnectISGECVault(tmpLib)
+        End If
         Dim FileExists As Boolean = False
         Try
-          FileExists = My.Computer.FileSystem.FileExists(PathFileName)
+          FileExists = IO.File.Exists(PathFileName)
         Catch ex As Exception
           Throw New ediException(1002, "Error while checking File Exists.")
         End Try
         If FileExists Then
           Try
-            My.Computer.FileSystem.DeleteFile(PathFileName)
+            IO.File.Delete(PathFileName)
             mayDeleteRecord = True
           Catch ex As Exception
             Throw New ediException(1003, "Error while deleting disk file.")
@@ -464,15 +472,18 @@ Namespace EJI
       Dim mayDeleteRecord As Boolean = False
       Dim tmpLib As ediALib = ediALib.GetLibraryByID(tmp.t_lbcd)
       Dim PathFileName As String = tmpLib.LibraryPath & "\" & tmp.t_dcid
+      If Not EJI.DBCommon.IsLocalISGECVault Then
+        EJI.ediALib.ConnectISGECVault(tmpLib)
+      End If
       Dim FileExists As Boolean = False
       Try
-        FileExists = My.Computer.FileSystem.FileExists(PathFileName)
+        FileExists = IO.File.Exists(PathFileName)
       Catch ex As Exception
         Throw New ediException(1002, "Error while checking File Exists.")
       End Try
       If FileExists Then
         Try
-          My.Computer.FileSystem.DeleteFile(PathFileName)
+          IO.File.Delete(PathFileName)
           mayDeleteRecord = True
         Catch ex As Exception
           Throw New ediException(1003, "Error while deleting disk file.")
@@ -534,15 +545,19 @@ Namespace EJI
         mayDeleteRecord = False
         Dim tmpLib As ediALib = ediALib.GetLibraryByID(tmp.t_lbcd)
         Dim PathFileName As String = tmpLib.LibraryPath & "\" & tmp.t_dcid
+
+        If Not EJI.DBCommon.IsLocalISGECVault Then
+          EJI.ediALib.ConnectISGECVault(tmpLib)
+        End If
         Dim FileExists As Boolean = False
         Try
-          FileExists = My.Computer.FileSystem.FileExists(PathFileName)
+          FileExists = IO.File.Exists(PathFileName)
         Catch ex As Exception
           Throw New ediException(1002, "Error while checking File Exists.")
         End Try
         If FileExists Then
           Try
-            My.Computer.FileSystem.DeleteFile(PathFileName)
+            IO.File.Delete(PathFileName)
             mayDeleteRecord = True
           Catch ex As Exception
             Throw New ediException(1003, "Error while deleting disk file.")

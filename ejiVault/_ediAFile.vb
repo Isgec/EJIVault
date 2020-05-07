@@ -16,12 +16,21 @@ Namespace EJI
     Public Property t_hndl As String = ""
     Public Property t_indx As String = ""
     Public Property t_prcd As String = ""
-    Public Property t_fnam As String = ""
+    Private Property _t_fnam As String = ""
     Public Property t_lbcd As String = ""
     Public Property t_atby As String = ""
     Private Property _t_aton As String = ""
     Public Property t_Refcntd As Int32 = 0
     Public Property t_Refcntu As Int32 = 0
+    Public Property t_fnam As String
+      Get
+        Return _t_fnam.Replace(",", "-").Replace("#", " ").Replace("'", "")
+      End Get
+      Set(value As String)
+        _t_fnam = value
+      End Set
+    End Property
+
     Public Property t_aton As String
       Get
         If _t_aton <> "" Then

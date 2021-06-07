@@ -63,7 +63,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Select top 1 * from ttcisg132" & DBCommon.ERPCompany & " where t_hndl='" & t_hndl & "' and t_indx='" & t_indx & "'"
+          Cmd.CommandText = "Select top 1 * from ttcisg132" & DBCommon.FixedCompany & " where t_hndl='" & t_hndl & "' and t_indx='" & t_indx & "'"
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           If Reader.Read() Then
@@ -85,7 +85,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.ERPCompany & " where t_hndl='" & t_hndl & "' and t_indx='" & t_indx & "'"
+          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.FixedCompany & " where t_hndl='" & t_hndl & "' and t_indx='" & t_indx & "'"
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           While Reader.Read()
@@ -107,7 +107,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.ERPCompany & " where t_hndl='" & t_hndl & "' and t_indx like '" & t_indx & "%'"
+          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.FixedCompany & " where t_hndl='" & t_hndl & "' and t_indx like '" & t_indx & "%'"
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           While (Reader.Read())
@@ -124,7 +124,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.ERPCompany & " where t_drid='" & t_drid & "'"
+          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.FixedCompany & " where t_drid='" & t_drid & "'"
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           If Reader.Read() Then
@@ -145,7 +145,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.ERPCompany & " where t_dcid='" & t_dcid & "'"
+          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.FixedCompany & " where t_dcid='" & t_dcid & "'"
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           While Reader.Read()
@@ -166,7 +166,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Select Top 1 * from ttcisg132" & DBCommon.ERPCompany & " where t_dcid='" & t_dcid & "'"
+          Cmd.CommandText = "Select Top 1 * from ttcisg132" & DBCommon.FixedCompany & " where t_dcid='" & t_dcid & "'"
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           While Reader.Read()
@@ -181,7 +181,7 @@ Namespace EJI
     Public Shared Function InsertData(ByVal Record As EJI.ediAFile) As EJI.ediAFile
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Dim Sql As String = ""
-        Sql &= "  INSERT [ttcisg132" & DBCommon.ERPCompany & "] ([t_drid],[t_dcid],[t_hndl],[t_indx],[t_prcd],[t_fnam],[t_lbcd],[t_atby],[t_aton],[t_Refcntd],[t_Refcntu]) "
+        Sql &= "  INSERT [ttcisg132" & DBCommon.FixedCompany & "] ([t_drid],[t_dcid],[t_hndl],[t_indx],[t_prcd],[t_fnam],[t_lbcd],[t_atby],[t_aton],[t_Refcntd],[t_Refcntu]) "
         Sql &= "  VALUES ("
         Sql &= "   '" & Record.t_drid & "'"
         Sql &= "  ,'" & Record.t_dcid & "'"
@@ -213,7 +213,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Delete ttcisg132" & DBCommon.ERPCompany & " where t_drid = '" & Record.t_drid & "'"
+          Cmd.CommandText = "Delete ttcisg132" & DBCommon.FixedCompany & " where t_drid = '" & Record.t_drid & "'"
           Con.Open()
           Cmd.ExecuteNonQuery()
         End Using
@@ -232,7 +232,7 @@ Namespace EJI
         Con.Open()
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.ERPCompany & " where t_hndl='" & t_hndl & "' and t_indx='" & t_indx & "'"
+          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.FixedCompany & " where t_hndl='" & t_hndl & "' and t_indx='" & t_indx & "'"
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           While Reader.Read()
             Results.Add(New EJI.ediAFile(Reader))
@@ -241,7 +241,7 @@ Namespace EJI
         End Using
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "delete ttcisg132" & DBCommon.ERPCompany & " where t_hndl='" & t_hndl & "' and t_indx='" & t_indx & "'"
+          Cmd.CommandText = "delete ttcisg132" & DBCommon.FixedCompany & " where t_hndl='" & t_hndl & "' and t_indx='" & t_indx & "'"
           Cmd.ExecuteNonQuery()
         End Using
       End Using
@@ -251,7 +251,7 @@ Namespace EJI
     Public Shared Function UpdateData(ByVal Record As EJI.ediAFile) As EJI.ediAFile
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Dim Sql As String = ""
-        Sql &= "  UPDATE [ttcisg132" & DBCommon.ERPCompany & "] "
+        Sql &= "  UPDATE [ttcisg132" & DBCommon.FixedCompany & "] "
         Sql &= "  SET "
         Sql &= "   [t_dcid] = '" & Record.t_dcid & "'"
         Sql &= "  ,[t_hndl] = '" & Record.t_hndl & "'"
@@ -260,7 +260,7 @@ Namespace EJI
         Sql &= "  ,[t_fnam] = '" & Record.t_fnam & "'"
         Sql &= "  ,[t_lbcd] = '" & Record.t_lbcd & "'"
         Sql &= "  ,[t_atby] = '" & Record.t_atby & "'"
-        Sql &= "  ,convert(datetime,'" & Convert.ToDateTime(Record.t_aton).ToString("dd/MM/yyyy") & "',103)"
+        Sql &= "  ,[t_aton] = convert(datetime,'" & Convert.ToDateTime(Record.t_aton).ToString("dd/MM/yyyy") & "',103)"
         Sql &= "  WHERE [t_drid] = '" & Record.t_drid & "'"
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
@@ -338,7 +338,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Select isnull(count(*),0) as cnt from ttcisg132" & DBCommon.ERPCompany & " where t_prcd='" & t_drid & "'"
+          Cmd.CommandText = "Select isnull(count(*),0) as cnt from ttcisg132" & DBCommon.FixedCompany & " where t_prcd='" & t_drid & "'"
           Con.Open()
           Dim cnt As Integer = Cmd.ExecuteScalar
           If cnt > 0 Then
@@ -349,14 +349,14 @@ Namespace EJI
       Return mRet
     End Function
     ''' <summary>
-    ''' Deletes only when record is not further copied
-    ''' If Record is Copied => Deletes only meta data
+    ''' Deletes, only when record is not further copied
+    ''' If Record is Not Copied => Deletes only meta data
     ''' If Record is Main   => Deletes also Disk file
     ''' </summary>
     ''' <param name="t_drid"></param>
     Public Shared Sub FileDelete(ByVal t_drid As String)
-	'Use IO Functions
-	'Map path if IsLocalIsgecVault
+      'Use IO Functions
+      'Map path if IsLocalIsgecVault
       Dim tmp As ediAFile = GetFileByRecordID(t_drid)
       If IsFileCopied(t_drid) Then
         Throw New ediException(1001, "File is copied CANNOT delete.")
@@ -391,7 +391,7 @@ Namespace EJI
           Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
             Using Cmd As SqlCommand = Con.CreateCommand()
               Cmd.CommandType = CommandType.Text
-              Cmd.CommandText = " delete ttcisg132" & DBCommon.ERPCompany & " where t_drid='" & t_drid & "'"
+              Cmd.CommandText = " delete ttcisg132" & DBCommon.FixedCompany & " where t_drid='" & t_drid & "'"
               Con.Open()
               Cmd.ExecuteNonQuery()
             End Using
@@ -441,7 +441,7 @@ Namespace EJI
           Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
             Using Cmd As SqlCommand = Con.CreateCommand()
               Cmd.CommandType = CommandType.Text
-              Cmd.CommandText = " delete ttcisg132" & DBCommon.ERPCompany & " where t_dcid='" & tmp.t_dcid & "'"
+              Cmd.CommandText = " delete ttcisg132" & DBCommon.FixedCompany & " where t_dcid='" & tmp.t_dcid & "'"
               Con.Open()
               Cmd.ExecuteNonQuery()
             End Using
@@ -462,7 +462,7 @@ Namespace EJI
         Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
           Using Cmd As SqlCommand = Con.CreateCommand()
             Cmd.CommandType = CommandType.Text
-            Cmd.CommandText = " delete ttcisg132" & DBCommon.ERPCompany & " where t_dcid='" & tmp.t_dcid & "' and t_prcd <> 'EJIMAIN'"
+            Cmd.CommandText = " delete ttcisg132" & DBCommon.FixedCompany & " where t_dcid='" & tmp.t_dcid & "' and t_prcd <> 'EJIMAIN'"
             Con.Open()
             Cmd.ExecuteNonQuery()
           End Using
@@ -505,7 +505,7 @@ Namespace EJI
           Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
             Using Cmd As SqlCommand = Con.CreateCommand()
               Cmd.CommandType = CommandType.Text
-              Cmd.CommandText = " delete ttcisg132" & DBCommon.ERPCompany & " where t_dcid='" & tmp.t_dcid & "'"
+              Cmd.CommandText = " delete ttcisg132" & DBCommon.FixedCompany & " where t_dcid='" & tmp.t_dcid & "'"
               Con.Open()
               Cmd.ExecuteNonQuery()
             End Using
@@ -525,7 +525,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.ERPCompany & " where t_prcd='" & t_drid & "' "
+          Cmd.CommandText = "Select * from ttcisg132" & DBCommon.FixedCompany & " where t_prcd='" & t_drid & "' "
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           While Reader.Read()
@@ -580,7 +580,7 @@ Namespace EJI
           Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
             Using Cmd As SqlCommand = Con.CreateCommand()
               Cmd.CommandType = CommandType.Text
-              Cmd.CommandText = " delete ttcisg132" & DBCommon.ERPCompany & " where t_drid='" & t_drid & "'"
+              Cmd.CommandText = " delete ttcisg132" & DBCommon.FixedCompany & " where t_drid='" & t_drid & "'"
               Con.Open()
               Cmd.ExecuteNonQuery()
             End Using
@@ -631,6 +631,101 @@ Namespace EJI
       Results = EJI.ediAFile.InsertData(Results)
       Return Results
     End Function
+    Public Shared Function UploadFile(hndl As String, indx As String, PathFileName As String, Optional createdBy As String = "") As EJI.ediAFile
+      Dim FileExists As Boolean = False
+      Try
+        FileExists = My.Computer.FileSystem.FileExists(PathFileName)
+      Catch ex As Exception
+        Throw New ediException(1002, "Error while checking File Exists.")
+      End Try
+      If Not FileExists Then
+        Throw New ediException(1006, "Uploaded File Not Found.")
+      End If
+      Dim Record As ediAFile = ediAFile.GetFileByHandleIndex(hndl, indx)
+      If Record Is Nothing Then
+        Dim ejiLib As EJI.ediALib = EJI.ediALib.GetActiveLibrary()
+        Record = New ediAFile
+        With Record
+          .t_drid = EJI.ediASeries.GetNextRecordID()
+          .t_dcid = EJI.ediASeries.GetNextFileID()
+          .t_prcd = "EJIMAIN"
+          .t_aton = Now.ToString("dd/MM/yyyy")
+          .t_lbcd = ejiLib.t_lbcd
+          .t_hndl = hndl
+          .t_indx = indx
+          .t_fnam = IO.Path.GetFileName(PathFileName).Replace(",", "-").Replace("'", "-")
+          .t_atby = createdBy
+          .t_aton = Now.ToString("dd/MM/yyyy")
+          .t_Refcntd = 0
+          .t_Refcntu = 0
+        End With
+        EJI.DBCommon.ConnectLibrary()
+        Dim TargetPathFileName As String = ejiLib.LibraryPath & "\" & Record.t_dcid
+        Dim mayInsertRecord As Boolean = False
+        Dim TargetExists As Boolean = False
+        Try
+          TargetExists = My.Computer.FileSystem.FileExists(TargetPathFileName)
+        Catch ex As Exception
+          Throw New ediException(1008, "Error while checking Target File Exists.")
+        End Try
+        If Not TargetExists Then
+          Try
+            My.Computer.FileSystem.CopyFile(PathFileName, TargetPathFileName)
+            mayInsertRecord = True
+          Catch ex As Exception
+            Throw New ediException(1009, "Error while copying disk file to Vault.")
+          End Try
+        Else
+          mayInsertRecord = True
+        End If
+        If mayInsertRecord Then
+          InsertData(Record)
+        End If
+      Else
+        With Record
+          .t_aton = Now.ToString("dd/MM/yyyy")
+          .t_fnam = IO.Path.GetFileName(PathFileName).Replace(",", "-").Replace("'", "-")
+          If createdBy <> "" Then
+            .t_atby = createdBy
+          End If
+          .t_aton = Now.ToString("dd/MM/yyyy")
+        End With
+        Dim ejiLib As EJI.ediALib = EJI.ediALib.GetLibraryByID(Record.t_lbcd)
+        EJI.DBCommon.ConnectLibrary(Record.t_lbcd)
+        Dim TargetPathFileName As String = ejiLib.LibraryPath & "\" & Record.t_dcid
+        Dim mayUpdateRecord As Boolean = False
+        Dim TargetExists As Boolean = False
+        Try
+          TargetExists = My.Computer.FileSystem.FileExists(TargetPathFileName)
+        Catch ex As Exception
+          Throw New ediException(1008, "Error while checking Target File Exists.")
+        End Try
+        If Not TargetExists Then
+          Try
+            My.Computer.FileSystem.CopyFile(PathFileName, TargetPathFileName)
+            mayUpdateRecord = True
+          Catch ex As Exception
+            Throw New ediException(1009, "Error while copying disk file to Vault.")
+          End Try
+        Else
+          Try
+            My.Computer.FileSystem.DeleteFile(TargetPathFileName)
+          Catch ex As Exception
+          End Try
+          Try
+            My.Computer.FileSystem.CopyFile(PathFileName, TargetPathFileName)
+            mayUpdateRecord = True
+          Catch ex As Exception
+            Throw New ediException(1009, "Error while copying disk file to Vault.")
+          End Try
+        End If
+        If mayUpdateRecord Then
+          UpdateData(Record)
+        End If
+      End If
+      Return Record
+    End Function
+
     Public Sub New(ByVal Rd As SqlDataReader)
       DBCommon.NewObj(Me, Rd)
     End Sub

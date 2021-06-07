@@ -20,29 +20,36 @@ Namespace EJI
       End Get
     End Property
     Public Shared Function ConnectISGECVault(oLib As EJI.ediALib) As Boolean
-      Try
-        ConnectToNetworkFunctions.disconnectFromNetwork("X:")
-      Catch ex As Exception
-      End Try
-      Dim mRet As Boolean = False
       If Not EJI.DBCommon.IsLocalISGECVault Then
-        mRet = ConnectToNetworkFunctions.connectToNetwork(oLib.LibraryPath, "X:", "administrator", "Indian@12345")
+        Try
+          ConnectToNetworkFunctions.disconnectFromNetwork("X:")
+        Catch ex As Exception
+        End Try
+        Dim mRet As Boolean = False
+        If Not EJI.DBCommon.IsLocalISGECVault Then
+          mRet = ConnectToNetworkFunctions.connectToNetwork(oLib.LibraryPath, "X:", "administrator", "Indian@12345")
+        End If
+        Return mRet
       End If
-      Return mRet
+      Return True
     End Function
     Public Shared Function DisconnectISGECVault() As Boolean
-      Try
-        Return ConnectToNetworkFunctions.disconnectFromNetwork("X:")
-      Catch ex As Exception
-      End Try
-      Return False
+      If Not EJI.DBCommon.IsLocalISGECVault Then
+        Try
+          Return ConnectToNetworkFunctions.disconnectFromNetwork("X:")
+        Catch ex As Exception
+        End Try
+        Return False
+      Else
+        Return True
+      End If
     End Function
     Public Shared Function GetActiveLibrary() As EJI.ediALib
       Dim Results As EJI.ediALib = Nothing
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "select top 1 * from ttcisg127" & DBCommon.ERPCompany & " where t_acti = 'T'"
+          Cmd.CommandText = "select top 1 * from ttcisg127" & DBCommon.FixedCompany & " where t_acti = 'T'"
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           If Reader.Read() Then
@@ -62,7 +69,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "select top 1 * from ttcisg127" & DBCommon.ERPCompany & " where t_lbcd = '" & t_lbcd & "'"
+          Cmd.CommandText = "select top 1 * from ttcisg127" & DBCommon.FixedCompany & " where t_lbcd = '" & t_lbcd & "'"
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           If Reader.Read() Then

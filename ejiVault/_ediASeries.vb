@@ -13,8 +13,10 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Con.Open()
         Dim mSql As String = ""
-        mSql &= " Update ttcisg131" & DBCommon.ERPCompany & " set t_rnum=t_rnum+1 where t_acti='Z' "
-        mSql &= " Select top 1 isnull(t_seri + Ltrim(str(t_rnum)),'') as FileName from ttcisg131" & DBCommon.ERPCompany & " where t_acti = 'Z' "
+        mSql &= " BEGIN TRANSACTION "
+        mSql &= " Update ttcisg131" & DBCommon.FixedCompany & " set t_rnum=t_rnum+1 where t_acti='Z' "
+        mSql &= " Select top 1 isnull(t_seri + Ltrim(str(t_rnum)),'') as FileName from ttcisg131" & DBCommon.FixedCompany & " where t_acti = 'Z' "
+        mSql &= " COMMIT TRANSACTION "
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
           Cmd.CommandText = mSql
@@ -28,8 +30,10 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Con.Open()
         Dim mSql As String = ""
-        mSql &= " Update ttcisg131" & DBCommon.ERPCompany & " set t_rnum=t_rnum+1 where t_acti='T' "
-        mSql &= " Select top 1 isnull(t_seri + '_' + Ltrim(str(t_rnum)),'') as FileName from ttcisg131" & DBCommon.ERPCompany & " where t_acti = 'T' "
+        mSql &= " BEGIN TRANSACTION "
+        mSql &= " Update ttcisg131" & DBCommon.FixedCompany & " set t_rnum=t_rnum+1 where t_acti='T' "
+        mSql &= " Select top 1 isnull(t_seri + '_' + Ltrim(str(t_rnum)),'') as FileName from ttcisg131" & DBCommon.FixedCompany & " where t_acti = 'T' "
+        mSql &= " COMMIT TRANSACTION "
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
           Cmd.CommandText = mSql
@@ -43,7 +47,7 @@ Namespace EJI
       Using Con As SqlConnection = New SqlConnection(DBCommon.GetBaaNConnectionString())
         Using Cmd As SqlCommand = Con.CreateCommand()
           Cmd.CommandType = CommandType.Text
-          Cmd.CommandText = "select top 1 * from ttcisg131" & DBCommon.ERPCompany & " where t_acti = 'T'"
+          Cmd.CommandText = "select top 1 * from ttcisg131" & DBCommon.FixedCompany & " where t_acti = 'T'"
           Con.Open()
           Dim Reader As SqlDataReader = Cmd.ExecuteReader()
           If Reader.Read() Then

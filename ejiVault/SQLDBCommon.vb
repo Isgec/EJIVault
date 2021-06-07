@@ -5,8 +5,37 @@ Namespace EJI
     Public Shared Property BaaNLive As Boolean = True
     Public Shared Property JoomlaLive As Boolean = True
     Public Shared Property ERPCompany As String = "200"
+    Public Shared Property FixedCompany As String = "200"
     Public Shared Property IsLocalISGECVault As Boolean = True
     Public Shared Property ISGECVaultIP As String = ""
+    Public Shared Function ConnectLibrary(LibraryID As String) As Boolean
+      If Not EJI.DBCommon.IsLocalISGECVault Then
+        ConnectToNetworkFunctions.disconnectFromNetwork("X:")
+        Return ConnectToNetworkFunctions.connectToNetwork(ediALib.GetLibraryByID(LibraryID).LibraryPath, "X:", "administrator", "Indian@12345")
+      Else
+        Return True
+      End If
+    End Function
+    Public Shared Function ConnectLibrary() As Boolean
+      If Not EJI.DBCommon.IsLocalISGECVault Then
+        ConnectToNetworkFunctions.disconnectFromNetwork("X:")
+        Return ConnectToNetworkFunctions.connectToNetwork(ediALib.GetActiveLibrary.LibraryPath, "X:", "administrator", "Indian@12345")
+      Else
+        Return True
+      End If
+    End Function
+    Public Shared Function DisconnectLibrary() As Boolean
+      Try
+        Return ConnectToNetworkFunctions.disconnectFromNetwork("X:")
+      Catch ex As Exception
+        Return False
+      End Try
+      Return True
+    End Function
+
+    ''' <summary>
+    ''' To work with configuration setting of EJIVault
+    ''' </summary>
     Public Shared Sub Initialize()
       modMain.Initialize()
     End Sub
